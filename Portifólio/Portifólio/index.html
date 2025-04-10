@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Paulo Lorenzoni, desenvolvedor web especializado em [suas especialidades]">
+    <meta name="keywords" content="portfolio, desenvolvedor web, front-end, back-end">
+    <title>Paulo Lorenzoni | Desenvolvedor Web</title>
+
+    <!-- Preload CSS -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"></noscript>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #252a6f;
+            --accent-color: #4caf50;
+            --text-color: #333;
+            --light-bg: #f4f4f9;
+            --dark-bg: #1a1a2e;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset e Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            padding: 1rem 0;
+            background-color: var(--primary-color);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Seções */
+        section {
+            padding: 4rem 0;
+            scroll-margin-top: 80px;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--white);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Sobre Mim */
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Habilidades */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .skill-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            width: 160px;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Projetos */
+        .project-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+
+        .badge-tech {
+            background-color: var(--primary-color);
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* Contato */
+        .contact-form .form-control {
+            border-radius: 0;
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        .contact-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 2rem 0;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-3 fw-bold" href="#">Paulo Lorenzoni</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link active" href="#sobre">Sobre</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero d-flex align-items-center" style="min-height: 80vh;">
+            <div class="container text-center">
+                <h1 class="display-3 fw-bold mb-3">Olá, eu sou <span class="text-primary">Paulo Lorenzoni</span></h1>
+                <h2 class="fs-4 mb-4">Desenvolvedor Web Full Stack</h2>
+                <p class="lead mb-5">Criando soluções digitais que fazem a diferença</p>
+                <a href="#projetos" class="btn btn-primary btn-lg px-4 me-2">Meus Projetos</a>
+                <a href="#contato" class="btn btn-outline-primary btn-lg px-4">Contato</a>
+            </div>
+        </section>
+
+        <!-- Sobre Mim -->
+        <section id="sobre" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center">Sobre Mim</h2>
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                        <img src="img/paulo.jpg" alt="Paulo Lorenzoni - Foto de Perfil" class="profile-img">
+                    </div>
+                    <div class="col-lg-8">
+                        <h3 class="mb-3">Desenvolvedor Web com paixão por criar</h3>
+                        <p>Olá! Meu nome é Paulo Lorenzoni e sou um desenvolvedor web apaixonado por criar soluções digitais eficientes e bonitas. Com 2 anos de experiência no mercado, já trabalhei em diversos projetos desde pequenos sites até aplicações empresariais complexas.</p>
+                        <p>Acredito que a tecnologia deve ser acessível e útil para todos, e é por isso que me dedico a criar experiências digitais que sejam intuitivas, acessíveis e visualmente atraentes.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>Nome:</strong> Paulo Vinicius Lorenzoni Salazar</li>
+                                    <li class="mb-2"><strong>Email:</strong> Paulo.lorenzoni99@gmail.com</li>
+                                    <li class="mb-2"><strong>Cidade:</strong> Manaus (AM)</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>Idade:</strong> 25</li>
+                                    <li class="mb-2"><strong>Formação:</strong> Técnico de Informática</li>
+                                    <li class="mb-2"><strong>Freelance:</strong> Disponível</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habilidades -->
+<section id="habilidades" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center">Minhas Habilidades</h2>
+        <p class="text-center mb-5">Aqui estão algumas das tecnologias com as quais trabalho regularmente</p>
+        
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fab fa-html5 skill-icon"></i>
+                <h4>HTML5</h4>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted mt-1 d-block text-center">90%</small>
+            </div>
+            
+            <div class="skill-card">
+                <i class="fab fa-css3-alt skill-icon"></i>
+                <h4>CSS3</h4>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted mt-1 d-block text-center">85%</small>
+            </div>
+            
+            <div class="skill-card">
+                <i class="fab fa-js skill-icon"></i>
+                <h4>JavaScript</h4>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted mt-1 d-block text-center">80%</small>
+            </div>
+            
+            <div class="skill-card">
+                <i class="fab fa-react skill-icon"></i>
+                <h4>React</h4>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted mt-1 d-block text-center">75%</small>
+            </div>
+            
+            <div class="skill-card">
+                <i class="fab fa-node-js skill-icon"></i>
+                <h4>Node.js</h4>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <small class="text-muted mt-1 d-block text-center">70%</small>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- Contato -->
+        <section id="contato" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title text-center">Entre em Contato</h2>
+                <p class="text-center mb-5">Estou disponível para oportunidades de trabalho e projetos freelancer</p>
+                
+                <div class="row">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <form class="contact-form">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Seu Nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Seu Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Assunto">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Sua Mensagem" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="ps-lg-5">
+                            <h4 class="mb-4">Informações de Contato</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                    <span>Manaus, Amazonas</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-envelope me-2 text-primary"></i>
+                                    <span>Paulo.lorenzoni99@gmail.com</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fas fa-phone me-2 text-primary"></i>
+                                    <span>+55 (92) 99392-4152</span>
+                                </li>
+                            </ul>
+                            
+                            <h4 class="mt-5 mb-4">Redes Sociais</h4>
+<div class="social-links">
+    <a href="https://www.linkedin.com/in/seu-usuario" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://github.com/PauloLorenzonii" target="_blank" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+    </a>
+    <a href="https://x.com/Paulinho_vls" target="_blank" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://wa.me/qr/TUYFPQ5EXHK6H1" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://wa.me/qr/TUYFPQ5EXHK6H1" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="py-4">
+        <div class="container text-center">
+            <p class="mb-2">&copy; 2025 Paulo Lorenzoni. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lazy loading images
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            images.forEach(img => {
+                img.src = img.dataset.src;
+            });
+        } else {
+            // Fallback para browsers que não suportam lazy loading nativo
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+            document.body.appendChild(script);
+        }
+    </script>
+</body>
+</html>
